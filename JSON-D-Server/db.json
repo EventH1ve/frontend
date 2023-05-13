@@ -66,6 +66,7 @@
     }
   ],
   "eventid": {
+    "eventid": 2,
     "name": "Example Event",
     "cover": "https://www.dostor.org/Upload/libfiles/406/2/253.jpg",
     "date": "2023-05-01",

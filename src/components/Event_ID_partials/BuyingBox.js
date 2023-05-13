@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { FaTicketAlt, FaExclamationTriangle } from "react-icons/fa";
 import Seats from "./Seats";
+import axios from "axios";
 
 function BuyingBox({ eventData }) {
     const [event, setEvent] = useState(JSON.parse(eventData));
@@ -53,7 +54,8 @@ function BuyingBox({ eventData }) {
         });
         setShowBooking(false);
     };
-    function handleCheckout() {
+
+    async function handleCheckout() {
         const selectedTickets = event.tickets;
 
         
@@ -71,15 +73,30 @@ function BuyingBox({ eventData }) {
             };
         });
 
-        const data = {
-            event: {
-                name: event.name,
-            },
-            tickets: ticketsJson,
+        const payload = {
+            eventid: event.eventid,
+            tickets: JSON.stringify(ticketsJson),
+            token: data.user.token
         };
 
-        console.log(data);
-        // Send the data to the server using fetch() or a library like axios()
+        let lineItems = {
+            lineItems: [
+                {
+                    price_data: {
+                        unit_amount: 2000, // TODO Get price selected by user
+                        currency: "egp",
+                        product_data: {
+                            name: `Tickets for ${event.name}`,
+                        }
+                    },
+                    quantity: 1 // TODO Get number of tickets purchased
+                }
+            ],
+            metadata: payload
+        };
+
+        const res = await axios.post("/api/checkout", lineItems);
+        window.location.href = res.data.session.url;
     }
 
 

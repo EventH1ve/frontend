@@ -17,9 +17,9 @@ const SuccessPage = () => {
 
             const subtotal = b.session.amount_subtotal;
             const orderId = b.session.payment_intent.id;
-            const eventId = b.session.metadata.eventId;
+            const eventId = b.session.metadata.eventid;
             const token = b.session.metadata.token;
-            const ticketType = b.session.metadata.ticketType;
+            const tickets = b.session.metadata.tickets;
 
             setOrderId(orderId)
             setSubtotal(subtotal)
@@ -29,7 +29,7 @@ const SuccessPage = () => {
                 eventId,
                 orderId,
                 subtotal,
-                ticketType
+                tickets
             });
             
             const { qrURL } = ticketRes.data;

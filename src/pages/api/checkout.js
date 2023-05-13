@@ -23,6 +23,7 @@ export default async function handler(req, res) {
 
         res.status(201).json({session});
     } catch (e) {
+        console.log(e)
         res.status(500).json({message: e.message})
     }
 
