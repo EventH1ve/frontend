@@ -8,8 +8,6 @@ export default async function handler(req, res) {
 
     const {token, ...b} = req.body;
     
-    console.log(token, b)
-
     const ticketRes = await axios.post(`http://127.0.0.1:8000/api/payment`, b, {
         headers: {
             'Authorization': 'Bearer ' + token,

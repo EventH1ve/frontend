@@ -1,6 +1,9 @@
-import { useEffect, useState } from "react";
+import { getSession } from 'next-auth/react';
+import axios from "axios";
 
 const handleCheckout = async () => {
+    const authSession = await getSession();
+
     let lineItems = {
         lineItems: [
             {
@@ -8,20 +11,21 @@ const handleCheckout = async () => {
                     unit_amount: 2000,
                     currency: "egp",
                     product_data: {
-                        name: "Event Name;1",
+                        name: "Event Name",
                     }
                 },
                 quantity: 1
             }
-        ]
+        ],
+        metadata: {
+            eventId: 1,
+            ticketType: "VIP",
+            token: authSession.user.token
+        }
     };
-    const res = await fetch("/api/checkout", {
-        method: "POST",
-        body: JSON.stringify(lineItems)
-    });
-    const b = await res.json();
-    console.log(b)
-    window.location.href = b.session.url;
+
+    const res = await axios.post("/api/checkout", lineItems);
+    window.location.href = res.data.session.url;
 }
 
 function StripePage() {

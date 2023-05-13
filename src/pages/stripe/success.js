@@ -1,6 +1,5 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { getSession } from 'next-auth/react';
 import axios from "axios";
 
 
@@ -10,37 +9,30 @@ const SuccessPage = () => {
     const [ticketURL, setTicketURL] = useState();
     const router = useRouter();
     const sessionId = router.query.session_id;
-    // const authSession = useSession();
 
     useEffect(() => {
         const getSessionInfo = async () => {
-            console.log("sessionID", sessionId)
-            const res = await fetch(`/api/sessions/${sessionId}`, {
-                method: "GET"
-            });
-            const b = await res.json();
-            console.log(b);
+            const sessionRes = await axios.get(`/api/sessions/${sessionId}`)
+            const b = sessionRes.data
+
             const subtotal = b.session.amount_subtotal;
             const orderId = b.session.payment_intent.id;
-            let eventArr = b.session.line_items.data[0].description.split(';');
-            const eventName = eventArr[0];
-            const eventId = parseInt(eventArr[1]);
-            console.log(eventName);
-            console.log(eventId);
+            const eventId = b.session.metadata.eventId;
+            const token = b.session.metadata.token;
+            const ticketType = b.session.metadata.ticketType;
 
             setOrderId(orderId)
             setSubtotal(subtotal)
-            let authSession  = await getSession();
 
-            const tRes = await axios.post('/api/ticket', {
-                token: authSession.user.token,
+            const ticketRes = await axios.post('/api/ticket', {
+                token: token,
                 eventId,
                 orderId,
-                subtotal
+                subtotal,
+                ticketType
             });
             
-            const { qrURL } = tRes.data;
-            console.log(qrURL)
+            const { qrURL } = ticketRes.data;
             setTicketURL(qrURL)
         }
         getSessionInfo();
@@ -57,15 +49,5 @@ const SuccessPage = () => {
         </>
     )
 }
-
-export async function getServerSideProps(context) {
-    const session = await getSession();
-    console.log(session)
-    
-
-    return {
-      props: {}, // will be passed to the page component as props
-    };
-  }
 
 export default SuccessPage;

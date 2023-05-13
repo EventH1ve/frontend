@@ -7,8 +7,7 @@ export default async function handler(req, res) {
     }
 
     try {
-        const body = JSON.parse(req.body).lineItems
-        console.log(body)
+        const {lineItems, metadata} = req.body;
 
         const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
             apiVersion: "2022-11-15"
@@ -18,9 +17,10 @@ export default async function handler(req, res) {
             mode: 'payment',
             success_url: `http://localhost:3000/stripe/success?session_id={CHECKOUT_SESSION_ID}`,
             cancel_url: "http://localhost:3000/stripe/",
-            line_items: body
+            line_items: lineItems,
+            metadata: metadata
         });
-        console.log(session);
+
         res.status(201).json({session});
     } catch (e) {
         res.status(500).json({message: e.message})
