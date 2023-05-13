@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "@mui/material";
 
 
 const SuccessPage = () => {
@@ -44,7 +45,7 @@ const SuccessPage = () => {
                 <h1>Order Successful</h1>
                 <h2>Order ID: {orderId}</h2>
                 <h2>Subtotal: {subtotal}</h2>
-                <h3>Ticket URL: {ticketURL}</h3>
+                <Link href={ticketURL}>Ticket QR Code</Link>
             </div>
         </>
     )
