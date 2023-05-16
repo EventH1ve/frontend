@@ -2,13 +2,11 @@ import UserNavBar from "../../components/UserNavBar";
 import EventsContainer from "../../components/Home_Page_partials/EventsContainer";
 import FooterComponent from "../../components/FooterComponent";
 import Parteners from "../../components/Home_Page_partials/Parteners";
-import LoadingComponent from "../../components/LoadingComponent";
 import { useEffect, useState } from "react";
 import { TextField } from '@mui/material';
 import { FaSearchengin } from "react-icons/fa";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import axios from "../../utils/axios"
+import axios from "../../utils/axios";    
+
 
 function Home() {
     const [allEvents, setAllEvents] = useState([]);
@@ -17,14 +15,13 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/events');
+                const response = await axios.get('/api/event');
                 const data = response.data;
                 setAllEvents(data);
             } catch (error) {
                 console.error(error);
             }
         };
-    
         fetchData();
     }, []);
 
@@ -36,29 +33,6 @@ function Home() {
     const handleSearchQueryChange = (event) => {
         setSearchQuery(event.target.value);
     };
-
-    const { status, data } = useSession();
-    const router = useRouter();
-
-    useEffect(() => {
-        if (status === "authenticated") {
-            if (data.user.role === "admin") {
-                router.push("/auth/signin");
-            } else {
-                return;
-            }
-        }
-       
-
-    }, [status]);
-
-
-   
-
-    // Check if the user exists and is not an admin
-    if (status === "authenticated" && data && data.user.role == "admin") {
-        return <LoadingComponent />;
-    }
 
     return (
         <div className=" bg-[color:var(--primary-color)] h-full">
@@ -74,7 +48,7 @@ function Home() {
                         <div className="flex justify-center mb-4 md:w-[60%] w-[90%]">
                             <TextField label="Search Events" sx={TextFieldStyle} variant="outlined" type="text" placeholder="Search by Event Name or Venue...." InputProps={{ endAdornment: <FaSearchengin size={24} />, }} value={searchQuery} onChange={handleSearchQueryChange} />
                         </div>
-                        <h1 className="text-2xl text-[color:var(--light-gray)]  mb-5 flex justify-center ">  Our Partners </h1>
+                        <h1 className="text-2xl text-[color:var(--light-gray)]  mb-5 flex justify-center ">  Our Parteners </h1>
                         <Parteners />
                         <h1 className="text-2xl text-[color:var(--light-gray)]  mb-5 flex justify-center ">  Upcoming Events</h1>
                         <EventsContainer Events={filteredEvents} />

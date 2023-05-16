@@ -8,7 +8,7 @@ const EventCard = ({ event }) => {
     return (
         <div
             onClick={() => {
-                router.push(`/event/${event.event_id}`);
+                router.push(`/event/${event.id}`);
             }}
             className="hover:scale-105 cursor-pointer transition-all bg-[color:var(--white-color)] rounded-lg shadow-md"
             style={{

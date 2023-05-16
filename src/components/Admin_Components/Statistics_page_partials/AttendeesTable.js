@@ -44,7 +44,7 @@ const AttendeesTable = () => {
             attendeeID: '2536654564',
             created_at: '2023-05-03/14:20:00',
         }, {
-            id: 3,
+            id: 4,
             username: 'bob_johnson',
             name: 'Bob Johnson',
             tickets: 1,
@@ -53,7 +53,7 @@ const AttendeesTable = () => {
             created_at: '2023-05-03/14:20:00',
         },
         {
-            id: 3,
+            id: 5,
             username: 'bob_johnson',
             name: 'Bob Johnson',
             tickets: 1,
@@ -61,7 +61,7 @@ const AttendeesTable = () => {
             attendeeID: '545645486653',
             created_at: '2023-05-03/14:20:00',
         },{
-            id: 3,
+            id: 6,
             username: 'bob_johnson',
             name: 'Bob Johnson',
             tickets: 1,
@@ -69,6 +69,8 @@ const AttendeesTable = () => {
             attendeeID: '545645486653',
             created_at: '2023-05-03/14:20:00',
         },
+        
+
     ]);
 
     const handleTransactionClick = (attendeeID) => {
@@ -90,7 +92,7 @@ const AttendeesTable = () => {
           onClose={closePopup}
           modal
           closeOnDocumentClick
-          contentStyle={{ maxWidth: "1500px", padding: "0rem", borderRadius: "20px", width: "85%" }}
+          contentStyle={{ maxWidth: "1500px", padding: "0rem", borderRadius: "20px", width: "85%" ,maxHeight: "95%", overflow: "auto"}}
           className="center-popup"
         >
           <div style={{ display: "flex", justifyContent: "flex-end", marginBottom: "-28px" }}>

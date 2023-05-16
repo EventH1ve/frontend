@@ -1,0 +1,46 @@
+{
+  "eventName": "ssss",
+  "coverImage": {},
+  "date": "2023-05-17",
+  "time": "20:31",
+  "venue": "Manara",
+  "description": "hafla in manara",
+  "ticketTypes": [
+    {
+      "name": "General ",
+      "price": "300",
+      "limit": "5000",
+      "seated": false,
+      "seats": {
+        "A": [0, 0, 0],
+        "B": [0, 0, 0],
+        "C": [0, 1, 0],
+        "D": [0, 0, 0]
+      }
+    },
+    {
+      "name": "VIP",
+      "price": "400",
+      "limit": "200",
+      "seated": false,
+      "seats": {
+        "A": [0, 0, 3],
+        "B": [0, 0, 3],
+        "C": [0, 0, 0],
+        "D": [0, 0, 0]
+      }
+    },
+    {
+      "name": "V-VIP",
+      "price": "600",
+      "limit": 42,
+      "seated": true,
+      "seats": {
+        "A": [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0],
+        "B": [0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0],
+        "C": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        "D": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+      }
+    }
+  ]
+}

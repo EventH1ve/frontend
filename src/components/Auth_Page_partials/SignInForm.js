@@ -19,8 +19,8 @@ function SignInForm({ }) {
     const { data, status } = useSession();
 
     useEffect(() => {
-        if (status === "authenticated" && data.user.role === "user") router.push('/users/home');
-        else if (status === "authenticated" && data.user.role === "admin") router.push('/admins');
+        if (status === "authenticated" && data.user.role.toLowerCase() === "user") router.push('/users/home');
+        else if (status === "authenticated" && data.user.role.toLowerCase() === "admin") router.push('/admins');
     }, [status]);
 
     const handleSubmit = async (e) => {

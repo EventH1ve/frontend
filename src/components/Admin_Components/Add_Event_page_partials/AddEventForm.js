@@ -1,25 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
-import { FaPlus , FaTimes } from 'react-icons/fa';
+import { FaPlus, FaTimes } from 'react-icons/fa';
 import SeatsMap from './SeatsMap';
 import Popup from 'reactjs-popup';
 import "reactjs-popup/dist/index.css";
+import { Cloudinary } from 'cloudinary-core';
+
+const cloudinary = new Cloudinary({
+    cloud_name: "dacn7ee03",
+    api_key: "642655988859922",
+    api_secret: "aPbCxTG4eqzCJd-hNyWnb9Q_wdQ"
+});
 
 
 function AddEventForm() {
+    const [imageUrl, setImageUrl] = useState();
     const [eventName, setEventName] = useState('');
-    const [coverImage, setCoverImage] = useState('');
+    const [coverImage, setCoverImage] = useState();
     const [date, setDate] = useState('');
     const [time, setTime] = useState('');
     const [venue, setVenue] = useState('');
     const [description, setDescription] = useState('');
     const [ticketTypes, setTicketTypes] = useState([
-        { name: '', price: '', limit: '', seated: false, seats: {
-            A: [0, 0, 0],
-            B: [0, 0, 0],
-            C: [0, 1, 0],
-            D: [0, 0, 0]
-          } },
+        {
+            name: '', price: '', limit: '', seated: false, seats: {
+                A:[0,0,0],
+                B:[0,0,0],
+                C:[0,0,0]
+            }
+        },
     ]);
 
     const handleTicketTypeChange = (index, field, value) => {
@@ -31,14 +40,46 @@ function AddEventForm() {
     const handleAddTicketType = () => {
         setTicketTypes([
             ...ticketTypes,
-            { name: '', price: '', limit: '', seated: false, seats: {
-                "A": [0, 0, 3],
-                "B": [0, 0, 3],
-                "C": [0, 0, 0],
-                "D": [0, 0, 0]
-              } },
+            {
+                name: '', price: '', limit: '', seated: false, seats: {
+                    A:[0,0,0],
+                    B:[0,0,0],
+                    C:[0,0,0]
+                }
+            },
         ]);
     };
+
+
+    useEffect(() => {
+        async function uploadToCloudinary(file) {
+            try {
+                const formData = new FormData();
+                formData.append('file', file);
+                formData.append('upload_preset', 'tjsdpw0w');
+
+                const response = await fetch(
+                    `https://api.cloudinary.com/v1_1/${cloudinary.config().cloud_name}/image/upload`,
+                    {
+                        method: 'POST',
+                        body: formData,
+                    }
+                );
+
+                if (response.ok) {
+                    const data = await response.json();
+                    setImageUrl(data.secure_url);
+                }
+            } catch (error) {
+                console.error('Error uploading image to Cloudinary:', error);
+            }
+        }
+
+        if (coverImage) {
+            uploadToCloudinary(coverImage);
+        }
+    }, [coverImage]);
+
 
     const handleRemoveTicketType = (index) => {
         const updatedTicketTypes = [...ticketTypes];
@@ -46,7 +87,7 @@ function AddEventForm() {
         setTicketTypes(updatedTicketTypes);
     };
 
-    const handleSeatsSet = (index, seats ,limit) => {
+    const handleSeatsSet = (index, seats, limit) => {
         const updatedTicketTypes = [...ticketTypes];
         updatedTicketTypes[index].seats = seats;
         updatedTicketTypes[index].limit = limit;
@@ -63,7 +104,7 @@ function AddEventForm() {
     const closePopup = () => {
         setIsOpen(false);
     };
-    
+
 
 
     const handleSubmit = (e) => {
@@ -71,15 +112,15 @@ function AddEventForm() {
 
         const formData = {
             eventName,
-            coverImage,
+            "coverImage": imageUrl,
             date,
             time,
             venue,
             description,
             ticketTypes,
         };
-
-        console.log(formData);
+        //serialize and print form data 
+        console.log(JSON.stringify(formData, null, 4));
     };
 
     return (
@@ -160,10 +201,10 @@ function AddEventForm() {
                                         type="button"
                                         className={`btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full sm:w-auto sm:ml-4 ${!ticketType.seated ? 'opacity-50 cursor-not-allowed' : ''
                                             }`}
-                                        onClick={() => { 
-                                            togglePopup(); 
-                                            setIndex(index); 
-                                          }}
+                                        onClick={() => {
+                                            togglePopup();
+                                            setIndex(index);
+                                        }}
                                         disabled={!ticketType.seated}
                                     >
                                         Seats

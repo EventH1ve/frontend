@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { FaEye, FaEyeSlash, FaKey } from 'react-icons/fa';
-import { TextField,Alert } from '@mui/material';
+import { TextField, Alert, FormControl, MenuItem, Select, InputLabel } from '@mui/material';
 import axios from 'axios';
 import { useRouter } from "next/router";
+import { useSession } from 'next-auth/react';
 import LoadingComponent from '../LoadingComponent';
 
 
@@ -11,6 +12,7 @@ function SignUpForm({ }) {
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [mobileNumber, setMobileNumber] = useState('');
+    const [gender, setGender] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState(null);
@@ -19,6 +21,7 @@ function SignUpForm({ }) {
     const handleEmailChange = (e) => setEmail(e.target.value);
     const handleUsernameChange = (e) => setUsername(e.target.value);
     const handleMobileNumberChange = (e) => setMobileNumber(e.target.value);
+    const handleGenderChange = (e) => setGender(e.target.value);
     const handlePasswordChange = (e) => setPassword(e.target.value);
     const handleShowPasswordChange = () => setShowPassword(!showPassword);
     const router = useRouter();
@@ -28,16 +31,28 @@ function SignUpForm({ }) {
         if (status === "authenticated" && data.user.role === "user") router.push('/users/home');
         else if (status === "authenticated" && data.user.role === "admin") router.push('/admins');
     }, [status]);
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        console.log("submitting");
+        console.log({
+            fullName,
+            email,
+            username,
+            mobileNumber,
+            gender,
+            password
+        })
         try {
-            const res = await axios.post('/api/auth/signup', {
-                fullName,
+            let names = fullName.split(" ");
+            const res = await axios.post('http://127.0.0.1:8000/api/user/signup', {
+                "firstname": names[0],
+                "lastname": names[1],
                 email,
                 username,
-                mobileNumber,
+                "phonenumber": mobileNumber,
+                gender,
                 password
             });
             if (res.error) {
@@ -86,6 +101,16 @@ function SignUpForm({ }) {
                         {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
                 </div>
+            </div>
+            <div className="w-full md:w-1/2  mb-4">
+                <FormControl variant="outlined" sx={TextFieldStyle} className="w-full">
+                    <InputLabel id="gender-label">Gender</InputLabel>
+                    <Select labelId="gender-label" id="gender" name="gender" value={gender} onChange={handleGenderChange} label="Gender" >
+                        <MenuItem value="male" >Male </MenuItem >
+                        <MenuItem value="female">Female </MenuItem >
+                        <MenuItem value="other">Other </MenuItem >
+                    </Select>
+                </FormControl>
             </div>
             {error && <Alert severity="error" className='mb-5'>{error}</Alert>} {/* show error alert if error exists */}
             <button type="submit" className="btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full mb-4 sm:w-auto sm:mb-0">

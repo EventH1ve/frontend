@@ -14,6 +14,8 @@ function HistoryPopUp({ PastEvents }) {
         return event.name.toLowerCase().includes(searchTerm.toLowerCase());
     });
 
+    
+
     return (
         <div>
             <div className="bg-white p-4 m-8 rounded-lg shadow-md">

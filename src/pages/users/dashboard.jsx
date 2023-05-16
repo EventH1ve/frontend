@@ -18,14 +18,14 @@ const Dashboard = () => {
 
     const dashboardData = async () => {
         try {
-            const res = await axios.get("http://localhost:3001/dashboard");
+            const res = await axios.get("/api/dashboard");
             console.log(res.data);
-            console.log(res.data.Counters);
-            console.log(res.data.UpcomingEvents);
-            console.log(res.data.PastEvents);
-            setCounters(res.data.Counters);
-            setUpcomingEvents(res.data.UpcomingEvents);
-            setPastEvents(res.data.PastEvents);
+            console.log(res.data.counters);
+            console.log(res.data.upcomingEvents);
+            console.log(res.data.history);
+            setCounters(res.data.counters);
+            setUpcomingEvents(res.data.upcomingEvents);
+            setPastEvents(res.data.history);
         } catch (error) {
             console.log(error);
 

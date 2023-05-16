@@ -17,9 +17,10 @@ const AdminsHome = () => {
     const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
+
         const fetchData = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/events');
+                const response = await axios.get('/api/event/app');
                 const data = response.data;
                 setAllEvents(data);
             } catch (error) {

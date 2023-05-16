@@ -24,7 +24,7 @@ const SeatsMap = ({ _seats, _setSeats, _index, _togglePopUp }) => {
   };
 
   const handleNumRowsChange = (event) => {
-    if (event.target.value !== "") {
+    if (event.target.value == "") {
       event.target.value = 0;
     }
     const newNumRows = parseInt(event.target.value);

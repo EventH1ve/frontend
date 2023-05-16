@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { TextField } from '@mui/material';
-import { FaSearchengin, FaCircle, FaCheckCircle ,FaFileExcel } from "react-icons/fa";
+import { FaSearchengin, FaCircle, FaCheckCircle, FaFileExcel } from "react-icons/fa";
 import { CSVLink } from 'react-csv';
 
 function AttendeesPopup({ attendees }) {
   const [searchTerm, setSearchTerm] = useState("");
+
   const headers = [
     { label: 'Username', key: 'username' },
     { label: 'Name', key: 'name' },
@@ -14,6 +15,18 @@ function AttendeesPopup({ attendees }) {
     { label: 'Created At', key: 'created_at' },
   ];
   const csvData = attendees.map(({ id, ...rest }) => rest);
+
+  const filterAttendees = attendees.filter(attendee => {
+    return attendee.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
+  
+
+
+
+  const handleSearchTermChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   return (
     <div>
@@ -27,12 +40,13 @@ function AttendeesPopup({ attendees }) {
               variant="outlined"
               type="text"
               value={searchTerm}
+              onChange={handleSearchTermChange}
               placeholder="Search by Attendee Name"
               InputProps={{
                 endAdornment: <FaSearchengin size={24} />,
               }}
             />
-            
+
             <CSVLink
               data={csvData}
               headers={headers}
@@ -40,8 +54,8 @@ function AttendeesPopup({ attendees }) {
               className="ml-2"
               target="_blank"
             >
-            
-               <FaFileExcel size={53} className="text-green-800" />
+
+              <FaFileExcel size={53} className="text-green-800" />
             </CSVLink>
           </div>
         </div>
@@ -60,7 +74,7 @@ function AttendeesPopup({ attendees }) {
             </thead>
 
             <tbody className="text-gray-600 text-sm font-light">
-              {attendees.map((attendee) => (
+              {filterAttendees.map((attendee) => (
                 <tr key={attendee.id} className="border-b border-gray-200 hover:bg-gray-100">
                   <td className="py-3 px-6 text-center">{attendee.username}</td>
                   <td className="py-3 px-6 text-center">{attendee.name}</td>
@@ -73,47 +87,47 @@ function AttendeesPopup({ attendees }) {
                       </div>
                     )}
                     {attendee.status === 'paid' && (
-                                            <div className="flex items-center ">
-                                                <FaCheckCircle size={16} className="text-green-500 mr-2" />
-                                                <span className="text-green-500 font-bold text-center">Paid</span>
-                                            </div>
-                                        )}
-                                        {attendee.status === 'attended' && (
-                                            <div className="flex items-center r">
-                                                <FaCheckCircle size={16} className="text-blue-500 mr-1" />
-                                                <span className="text-blue-500 font-semibold text-center">Attended</span>
-                                            </div>
-                                        )}
-                                    </td>
-                                    <td
-                                        className="py-3 px-6 text-center cursor-pointer "
-                                        onClick={() => handleTransactionClick(attendee.attendeeID)}
-                                    >
-                                        <span className="text-gray-500 font-semibold text-center">{attendee.attendeeID}</span>
-                                    </td>
-                                    <td className="py-3 px-6 text-center cursor-pointer ">
-                                        <span className="mr-1 text-center">{attendee.created_at}</span>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
+                      <div className="flex items-center ">
+                        <FaCheckCircle size={16} className="text-green-500 mr-2" />
+                        <span className="text-green-500 font-bold text-center">Paid</span>
+                      </div>
+                    )}
+                    {attendee.status === 'attended' && (
+                      <div className="flex items-center r">
+                        <FaCheckCircle size={16} className="text-blue-500 mr-1" />
+                        <span className="text-blue-500 font-semibold text-center">Attended</span>
+                      </div>
+                    )}
+                  </td>
+                  <td
+                    className="py-3 px-6 text-center cursor-pointer "
+                    onClick={() => handleTransactionClick(attendee.attendeeID)}
+                  >
+                    <span className="text-gray-500 font-semibold text-center">{attendee.attendeeID}</span>
+                  </td>
+                  <td className="py-3 px-6 text-center cursor-pointer ">
+                    <span className="mr-1 text-center">{attendee.created_at}</span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
 
-                    </table>
-                </div>
-            </div>
+          </table>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 const TextFieldStyle =
 {
-    "& .MuiOutlinedInput-root": {
+  "& .MuiOutlinedInput-root": {
 
-        "&.Mui-focused fieldset": { borderColor: "var(--darker-secondary-color)" },
-    },
-    "& .MuiInputLabel-outlined.Mui-focused": {
-        color: "var(--gray-color)"
-    }
+    "&.Mui-focused fieldset": { borderColor: "var(--darker-secondary-color)" },
+  },
+  "& .MuiInputLabel-outlined.Mui-focused": {
+    color: "var(--gray-color)"
+  }
 }
 
 export default AttendeesPopup;
