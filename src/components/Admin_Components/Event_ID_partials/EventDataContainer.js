@@ -41,11 +41,11 @@ function EventDataContainer({ eventData }) {
                         </div>
                     </div>
                     <div class="flex flex-col mt-2 md:mt-4">
-                        <button type="button" class="mt-1 btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full mb-4 sm:w-auto sm:mb-0 whitespace-nowrap" onClick={() => router.push(`/admins/event/statistics/${eventData.eventId}`)}>
+                        <button type="button" class="mt-1 btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full mb-4 sm:w-auto sm:mb-0 whitespace-nowrap" onClick={() => router.push(`/admins/event/statistics/${eventData.id}`)}>
                             Event Statistics
                         </button>
                         
-                        <button type="button" class="mt-2 btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full mb-4 sm:w-auto sm:mb-0 whitespace-nowrap" onClick={() => router.push(`/admins/event/update/${eventData.eventId}`)}>
+                        <button type="button" class="mt-2 btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full mb-4 sm:w-auto sm:mb-0 whitespace-nowrap" onClick={() => router.push(`/admins/event/update/${eventData.id}`)}>
                             Update Event
                         </button>
                     </div>

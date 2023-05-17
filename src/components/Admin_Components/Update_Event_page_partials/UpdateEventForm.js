@@ -5,9 +5,9 @@ import LoadingComponent from '../../LoadingComponent';
 import Popup from 'reactjs-popup';
 import "reactjs-popup/dist/index.css";
 import { useState, useEffect } from 'react';
-import axios from 'axios';
+import axios from "../../../utils/axios";
 
-function UpdateEventForm() {
+function UpdateEventForm({ eventId }) {
     const [eventName, setEventName] = useState('');
     const [coverImage, setCoverImage] = useState('');
     const [date, setDate] = useState('');
@@ -15,17 +15,17 @@ function UpdateEventForm() {
     const [venue, setVenue] = useState('');
     const [description, setDescription] = useState('');
     const [ticketTypes, setTicketTypes] = useState([]);
-
     useEffect(() => {
-        axios.get('http://localhost:3001/update_event')
+        axios.get(`/api/event/${eventId}`)
             .then(response => {
-                setEventName(response.data.eventName);
-                setCoverImage(response.data.coverImage);
-                setDate(response.data.date);
-                setTime(response.data.time);
+                setEventName(response.data.name);
+                setCoverImage(response.data.cover);
+                let datetime = response.data.date.split('T');
+                setDate(datetime[0]);
+                setTime(datetime[1]);
                 setVenue(response.data.venue);
                 setDescription(response.data.description);
-                setTicketTypes(response.data.ticketTypes);
+                setTicketTypes(response.data.tickets);
             })
             .catch(error => {
                 console.log(error);

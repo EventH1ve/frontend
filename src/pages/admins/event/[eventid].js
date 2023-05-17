@@ -26,7 +26,7 @@ function EventPage() {
         const response = await axios.get(`/api/event/${eventId}`);
         if (response.status === 200) {
           const data = response.data;
-          console.log(data);
+          data.id = eventId;
           setEventData(data);
           setIsUserRegistered(
             data.participants.some((participant) => participant.id === userId)

@@ -10,6 +10,7 @@ import { useRouter } from "next/router"
 const updateevent = () => {
     const { status, data } = useSession();
     const router = useRouter();
+    const eventId = router.query.eventid;
 
     useEffect(() => {
         if (status === "authenticated") {
@@ -48,7 +49,7 @@ const updateevent = () => {
                             <img src="/favicon_io/eventhive-logo.svg" width={500} className="" alt="Logo" />
                         </a>
                     </div>
-                    <UpdateEventForm />
+                    <UpdateEventForm eventId={ eventId } />
                 </div>
             </div>
             <Footer />
