@@ -2,7 +2,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "@mui/material";
-
+import UserNavBar from "../../components/UserNavBar";
+import Footer from "../../components/FooterComponent";
+import OrderDetailsContainer from '../../components/payment_partials/OrderDetailsContainer';
 
 const SuccessPage = () => {
     const [subtotal, setSubtotal] = useState();
@@ -42,14 +44,19 @@ const SuccessPage = () => {
     }, []);
 
     return (
-        <>
-            <div>
-                <h1>Order Successful</h1>
-                <h2>Order ID: {orderId}</h2>
-                <h2>Subtotal: {subtotal}</h2>
-                <Link href={ticketURL}>Ticket QR Code</Link>
+        <div className="bg-[color:var(--primary-color)]">
+            <UserNavBar />
+            <div className="flex flex-col items-center justify-center">
+                <div className="container mt-4 bg-[color:var(--primary-color)]">
+                    <div className="container">
+                        <div className="grid grid-cols-1">
+                            <OrderDetailsContainer subtotal={subtotal} orderId={orderId} ticketURL={ticketURL} />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </>
+            <Footer />
+        </div>
     )
 }
 
