@@ -26,7 +26,8 @@ function EventPage() {
             try {
                 const response = await axios.get(`/api/event/${eventId}`);
                 if (response.status === 200) {
-                    const data = response.data[0];
+                    const data = response.data;
+                    data.id = eventId;
                     setEventData(data);
                 } else {
                     throw new Error('Failed to fetch event data');

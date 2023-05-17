@@ -22,6 +22,8 @@ const SuccessPage = () => {
             const token = b.session.metadata.token;
             const tickets = b.session.metadata.tickets;
 
+            console.log(eventId)
+
             setOrderId(orderId)
             setSubtotal(subtotal)
 

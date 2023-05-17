@@ -66,7 +66,7 @@ function BuyingBox({ eventData }) {
             const ticketCounter = counters[index];
 
             return {
-                ticket_type: ticket.type,
+                ticket_type: ticket.name,
                 Seated: Seated,
                 count: ticketCounter,
                 seats: selectedSeats,
@@ -74,7 +74,7 @@ function BuyingBox({ eventData }) {
         });
 
         const payload = {
-            eventid: event.eventid,
+            eventid: event.id,
             tickets: JSON.stringify(ticketsJson),
             token: data.user.token
         };
@@ -123,7 +123,7 @@ function BuyingBox({ eventData }) {
                             >
                                 <div className="flex items-center gap-2 col-span-1">
                                     <FaTicketAlt className="text-[color:var(--darker-secondary-color)] text-2xl" />
-                                    <span>{item.type}</span>
+                                    <span>{item.name}</span>
                                 </div>
                                 <div className="col-span-1 flex items-center justify-center gap-2">
                                     <button
@@ -154,7 +154,7 @@ function BuyingBox({ eventData }) {
                             >
                                 <div className="flex items-center gap-2 col-span-1">
                                     <FaTicketAlt className="text-[color:var(--darker-secondary-color)] text-2xl" />
-                                    <span>{item.type}</span>
+                                    <span>{item.name}</span>
                                 </div>
                                 <span className="text-center text-bold text-xl text-[color:var(--darker-secondary-color)] col-span-1">
                                     [Sold Out]
@@ -169,7 +169,7 @@ function BuyingBox({ eventData }) {
                             >
                                 <div className="flex items-center gap-2 col-span-1">
                                     <FaTicketAlt className="text-[color:var(--darker-secondary-color)] text-2xl" />
-                                    <span>{item.type}</span>
+                                    <span>{item.name}</span>
                                 </div>
                                 <button className="px-6 py-2 bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] text-white rounded focus:outline-none" onClick={() => switchToBookings(index)}>
                                     Seats
