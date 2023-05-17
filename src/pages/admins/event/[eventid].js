@@ -12,7 +12,7 @@ import axios from "../../../utils/axios";
 
 function EventPage() {
   const router = useRouter();
-  const eventId = router.query.eventId;
+  const eventId = router.query.eventid;
   const [eventData, setEventData] = useState([]);
 
   // function to handle share button click
@@ -23,9 +23,10 @@ function EventPage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get(`http://localhost:3001/eventid`);
+        const response = await axios.get(`/api/event/${eventId}`);
         if (response.status === 200) {
           const data = response.data;
+          data.id = eventId;
           setEventData(data);
           setIsUserRegistered(
             data.participants.some((participant) => participant.id === userId)
