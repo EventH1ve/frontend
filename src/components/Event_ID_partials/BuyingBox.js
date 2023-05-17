@@ -57,8 +57,12 @@ function BuyingBox({ eventData }) {
 
     async function handleCheckout() {
         const selectedTickets = event.tickets;
+        console.log(event.tickets.reduce(
+            (acc, item, index) => acc + counters[index] * item.price,
+            0
+        ));
 
-        
+
 
         const ticketsJson = selectedTickets.map((ticket, index) => {
             const selectedSeats = seats[index];
@@ -83,13 +87,13 @@ function BuyingBox({ eventData }) {
             lineItems: [
                 {
                     price_data: {
-                        unit_amount: 2000, // TODO Get price selected by user
+                        unit_amount: event.tickets.reduce((acc, item, index) => acc + counters[index] * item.price,0), 
                         currency: "egp",
                         product_data: {
                             name: `Tickets for ${event.name}`,
                         }
                     },
-                    quantity: 1 // TODO Get number of tickets purchased
+                    quantity: counters.reduce((acc, item) => acc + item, 0)
                 }
             ],
             metadata: payload
