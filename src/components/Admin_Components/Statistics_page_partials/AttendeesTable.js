@@ -5,7 +5,7 @@ import "reactjs-popup/dist/index.css";
 
 import AttendeesPopup from './AttendeesPopup';
 
-const AttendeesTable = () => {
+const AttendeesTable = ({ att }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const togglePopup = () => {
@@ -16,62 +16,9 @@ const AttendeesTable = () => {
         setIsOpen(false);
     };
 
-    const [attendees, setattendees] = useState([
-        {
-            id: 1,
-            username: 'john_doe',
-            name: 'John Doe',
-            tickets: 2,
-            status: 'pending',
-            attendeeID: '345343531',
-            created_at: '2023-05-01/10:30:00',
-        },
-        {
-            id: 2,
-            username: 'jane_smith',
-            name: 'Jane Smith',
-            tickets: 3,
-            status: 'paid',
-            attendeeID: '35245634534',
-            created_at: '2023-05-02/12:45:00',
-        },
-        {
-            id: 3,
-            username: 'bob_johnson',
-            name: 'Bob Johnson',
-            tickets: 1,
-            status: 'attended',
-            attendeeID: '2536654564',
-            created_at: '2023-05-03/14:20:00',
-        }, {
-            id: 4,
-            username: 'bob_johnson',
-            name: 'Bob Johnson',
-            tickets: 1,
-            status: 'attended',
-            attendeeID: '545645486653',
-            created_at: '2023-05-03/14:20:00',
-        },
-        {
-            id: 5,
-            username: 'bob_johnson',
-            name: 'Bob Johnson',
-            tickets: 1,
-            status: 'attended',
-            attendeeID: '545645486653',
-            created_at: '2023-05-03/14:20:00',
-        },{
-            id: 6,
-            username: 'bob_johnson',
-            name: 'Bob Johnson',
-            tickets: 1,
-            status: 'attended',
-            attendeeID: '545645486653',
-            created_at: '2023-05-03/14:20:00',
-        },
-        
+    console.log(att)
 
-    ]);
+    const [attendees, setattendees] = useState(att);
 
     const handleTransactionClick = (attendeeID) => {
         // do something when attendee id is clicked
@@ -112,9 +59,8 @@ const AttendeesTable = () => {
                         <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
                             <th className="py-3 px-6 text-center">Username</th>
                             <th className="py-3 px-6 text-center">Name</th>
-                            <th className="py-3 px-6 text-center">No. of Tickets</th>
+                            <th className="py-3 px-6 text-center">Ticket Type</th>
                             <th className="py-3 px-6 text-left">Status</th>
-                            <th className="py-3 px-6 text-center">Transaction ID</th>
                             <th className="py-3 px-6 text-center">Created At</th>
                         </tr>
                     </thead>
@@ -124,7 +70,7 @@ const AttendeesTable = () => {
                             <tr key={attendee.id} className="border-b border-gray-200 hover:bg-gray-100">
                                 <td className="py-3 px-6 text-center">{attendee.username}</td>
                                 <td className="py-3 px-6 text-center">{attendee.name}</td>
-                                <td className="py-3 px-6 text-center">{attendee.tickets}</td>
+                                <td className="py-3 px-6 text-center">{attendee.ticketType}</td>
                                 <td className="py-3 px-6 text-center">
                                     {attendee.status === 'pending' && (
                                         <div className="flex items-center ">
@@ -145,14 +91,8 @@ const AttendeesTable = () => {
                                         </div>
                                     )}
                                 </td>
-                                <td
-                                    className="py-3 px-6 text-center cursor-pointer "
-                                    onClick={() => handleTransactionClick(attendee.attendeeID)}
-                                >
-                                    <span className="text-gray-500 font-semibold text-center">{attendee.attendeeID}</span>
-                                </td>
                                 <td className="py-3 px-6 text-center cursor-pointer ">
-                                    <span className="mr-1 text-center">{attendee.created_at}</span>
+                                    <span className="mr-1 text-center">{attendee.createdat}</span>
                                 </td>
                             </tr>
                         ))}

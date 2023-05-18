@@ -8,13 +8,15 @@ const GenderChart = ({ genderPercentage }) => {
     return null;
   }
 
+  console.log(genderPercentage)
+
   const [selectedIndex, setSelectedIndex] = useState(0)
 
   const data = {
     labels: ['Female', 'Male'],
     datasets: [
       {
-        data: [100- Object.values(genderPercentage)[selectedIndex], Object.values(genderPercentage)[selectedIndex]],
+        data: [(Object.values(genderPercentage)[selectedIndex][1] / (Object.values(genderPercentage)[selectedIndex][0] + Object.values(genderPercentage)[selectedIndex][1])) * 100, (Object.values(genderPercentage)[selectedIndex][0] / (Object.values(genderPercentage)[selectedIndex][0] + Object.values(genderPercentage)[selectedIndex][1])) * 100],
         backgroundColor: ['rgba(255, 99, 132, 0.88)', 'rgba(53, 162, 235, 0.88)'],
         hoverBackgroundColor: ['#FF6384', '#36A2EB'],
       },
@@ -23,6 +25,7 @@ const GenderChart = ({ genderPercentage }) => {
 
   const handleOnClick = (index) => {
     setSelectedIndex(index);
+    console.log(Object.values(genderPercentage)[selectedIndex])
   }
 
   return (

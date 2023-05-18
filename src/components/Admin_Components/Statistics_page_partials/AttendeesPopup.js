@@ -9,10 +9,9 @@ function AttendeesPopup({ attendees }) {
   const headers = [
     { label: 'Username', key: 'username' },
     { label: 'Name', key: 'name' },
-    { label: 'No. of Tickets', key: 'tickets' },
+    { label: 'Ticket Type', key: 'ticketType' },
     { label: 'Status', key: 'status' },
-    { label: 'Transaction ID', key: 'attendeeID' },
-    { label: 'Created At', key: 'created_at' },
+    { label: 'Created At', key: 'createdat' },
   ];
   const csvData = attendees.map(({ id, ...rest }) => rest);
 

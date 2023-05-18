@@ -15,21 +15,21 @@ import axios from "../../../../utils/axios";
 
 const EventStatistics = () => {
 
-    const [eventData, setEventData] = useState([]);
+    const [eventData, setEventData] = useState(null);
 
     const router = useRouter();
 
 
-    const eventId = router.query.eventId;
+    const eventId = router.query.eventid;
 
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`http://localhost:3001/eventid_statistics`);
+                const response = await axios.get(`/api/admin/event/statistics/${eventId}`);
                 if (response.status === 200) {
                     const data = await response.data;
-                    console.log(data.ticketsData.Total[0]);
+                    console.log(data);
                     setEventData(data);
                 } else {
                     throw new Error("Failed to fetch event data");
@@ -85,8 +85,8 @@ const EventStatistics = () => {
                     <GenderChart genderPercentage={eventData.genderPercentage} />
                 </div>
             </div>
-            <AttendeesTable />
-            <ModeratorsTable />
+            <AttendeesTable att={eventData.attendees}/>
+            {/* <ModeratorsTable /> */}
         </div>
     );
 };
