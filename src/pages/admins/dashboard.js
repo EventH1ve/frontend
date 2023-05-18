@@ -6,7 +6,7 @@ import Moderators from "../../components/Admin_Components/AdminDashboard/Moderat
 
 import LoadingComponent from "../../components/LoadingComponent";
 import Footer from "../../components/FooterComponent";
-import axios from "axios";
+import axios from "../../utils/axios";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -16,7 +16,7 @@ const Dashboard = () => {
     const [counters, setCounters] = useState([]);
     const [upcomingEvents, setUpcomingEvents] = useState([]);
     const [pastEvents, setPastEvents] = useState([]);
-    const [moderators, setmoderators] = useState([]);
+    // const [moderators, setmoderators] = useState([]);
 
     const {status , data } = useSession();
 
@@ -24,15 +24,15 @@ const Dashboard = () => {
 
     const dashboardData = async () => {
         try {
-            const res = await axios.get("http://localhost:3001/AdminDashboard");
+            const res = await axios.get("/api/dashboard/admin");
             console.log(res.data);
-            console.log(res.data.Counters);
-            console.log(res.data.UpcomingEvents);
+            console.log(res.data.counters);
+            console.log(res.data.upcomingEvents);
             console.log(res.data.PastEvents);
-            setCounters(res.data.Counters);
-            setUpcomingEvents(res.data.UpcomingEvents);
-            setPastEvents(res.data.PastEvents);
-            setmoderators(res.data.Moderators)
+            setCounters(res.data.counters);
+            setUpcomingEvents(res.data.upcomingEvents);
+            setPastEvents(res.data.pastEvents);
+            // setmoderators(res.data.Moderators)
             setLoading(false); // set loading to false when data is fetched
         } catch (error) {
             console.log(error);
@@ -86,7 +86,7 @@ const Dashboard = () => {
                 <Counters Counters={counters} />
                 <UpcomingEvents UpcomingEvents={upcomingEvents} />
                 <PastEvents PastEvents={pastEvents} />
-                <Moderators moderators={moderators} />
+                {/* <Moderators moderators={moderators} /> */}
 
                 <Footer />
 
