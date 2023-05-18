@@ -5,6 +5,9 @@ import SeatsMap from './SeatsMap';
 import Popup from 'reactjs-popup';
 import "reactjs-popup/dist/index.css";
 import { Cloudinary } from 'cloudinary-core';
+import axios from "../../../utils/axios";
+import { useRouter } from "next/router";
+
 
 const cloudinary = new Cloudinary({
     cloud_name: "dacn7ee03",
@@ -14,6 +17,7 @@ const cloudinary = new Cloudinary({
 
 
 function AddEventForm() {
+    const router = useRouter();
     const [imageUrl, setImageUrl] = useState();
     const [eventName, setEventName] = useState('');
     const [coverImage, setCoverImage] = useState();
@@ -107,20 +111,33 @@ function AddEventForm() {
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        
+        console.log(ticketTypes)
+
+        let capacity = 0;
+        for (let ticket in ticketTypes) {
+            ticketTypes[ticket].price = parseFloat(ticketTypes[ticket].price)
+            capacity += ticketTypes[ticket].limit;            
+        }
 
         const formData = {
-            eventName,
-            "coverImage": imageUrl,
+            "name": eventName,
+            "profile": imageUrl,
             date,
-            time,
+            "time": `${time}:00`,
             venue,
+            capacity,
             description,
             ticketTypes,
         };
-        //serialize and print form data 
-        console.log(JSON.stringify(formData, null, 4));
+        try {
+            let res = await axios.post('/api/event', formData);
+            router.push('/admins')
+        } catch (err) {
+            console.log(err);
+        }
     };
 
     return (
