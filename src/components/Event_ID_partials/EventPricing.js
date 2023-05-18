@@ -16,7 +16,7 @@ function EventPricing({ eventData }) {
                                 className="flex justify-between items-center h-16 py-1 rounded-md p-4 gap-2 mb-2 hover:shadow-md"
                             >
                                 <FaTicketAlt className="text-[color:var(--darker-secondary-color)] text-2xl" />
-                                <span className="flex-1"> {item.type}</span>
+                                <span className="flex-1"> {item.name}</span>
                                 <span className="text-center text-xl">{item.price} EGP</span>
                             </li>
                         );
@@ -27,7 +27,7 @@ function EventPricing({ eventData }) {
                                 className="flex justify-between items-center h-16 py-1 rounded-md p-4 gap-2 mb-2 hover:shadow-md"
                             >
                                 <FaTicketAlt className="text-[color:var(--darker-secondary-color)] text-2xl" />
-                                <span className="flex-1">{item.type} </span>
+                                <span className="flex-1">{item.name} </span>
                                 <span className="text-center text-bold text-2xl text-[color:var(--darker-secondary-color)]">[Sold Out]</span>
                             </li>
                         );

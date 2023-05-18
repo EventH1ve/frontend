@@ -65,7 +65,7 @@ function EventPage() {
 
 
     if (!eventData || !eventData.cover)
-        return <div>ddddd</div>;
+        return <LoadingComponent />;
     else
         return (
             <div className="bg-[color:var(--primary-color)]">

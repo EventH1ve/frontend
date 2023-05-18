@@ -15,30 +15,34 @@ const SuccessPage = () => {
 
     useEffect(() => {
         const getSessionInfo = async () => {
-            const sessionRes = await axios.get(`/api/sessions/${sessionId}`)
-            const b = sessionRes.data
+            try {
+                const sessionRes = await axios.get(`/api/sessions/${sessionId}`)
+                const b = sessionRes.data
 
-            const subtotal = b.session.amount_subtotal;
-            const orderId = b.session.payment_intent.id;
-            const eventId = b.session.metadata.eventid;
-            const token = b.session.metadata.token;
-            const tickets = b.session.metadata.tickets;
+                const subtotal = b.session.amount_subtotal;
+                const orderId = b.session.payment_intent.id;
+                const eventId = b.session.metadata.eventid;
+                const token = b.session.metadata.token;
+                const tickets = b.session.metadata.tickets;
 
-            console.log(eventId)
+                console.log(eventId)
 
-            setOrderId(orderId)
-            setSubtotal(subtotal)
+                setOrderId(orderId)
+                setSubtotal(subtotal)
 
-            const ticketRes = await axios.post('/api/ticket', {
-                token: token,
-                eventId,
-                orderId,
-                subtotal,
-                tickets
-            });
-            
-            const { qrURL } = ticketRes.data;
-            setTicketURL(qrURL)
+                const ticketRes = await axios.post('/api/ticket', {
+                    token: token,
+                    eventId,
+                    orderId,
+                    subtotal: subtotal / 100, // Stripe sessions use cents
+                    tickets
+                });
+                
+                const { qrURL } = ticketRes.data;
+                setTicketURL(qrURL)
+            } catch (err) {
+                console.log(err)
+            }
         }
         getSessionInfo();
     }, []);

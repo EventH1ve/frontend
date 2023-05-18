@@ -57,17 +57,28 @@ function BuyingBox({ eventData }) {
 
     async function handleCheckout() {
         const selectedTickets = event.tickets;
-        console.log(event.tickets.reduce(
-            (acc, item, index) => acc + counters[index] * item.price,
-            0
-        ));
 
-
+        let ticketArr = []
 
         const ticketsJson = selectedTickets.map((ticket, index) => {
             const selectedSeats = seats[index];
             const Seated = ticket.Seated;
             const ticketCounter = counters[index];
+            
+            if (ticketCounter > 0) {
+                let productObj = {
+                    price_data: {
+                        unit_amount: ticket.price * 100, 
+                        currency: "egp",
+                        product_data: {
+                            name: `${ticket.name} tickets for ${event.name}`,
+                        }
+                    },
+                    quantity: ticketCounter
+                };
+    
+                ticketArr.push(productObj);  
+            }          
 
             return {
                 ticket_type: ticket.name,
@@ -83,19 +94,10 @@ function BuyingBox({ eventData }) {
             token: data.user.token
         };
 
+        console.log(ticketArr)
+
         let lineItems = {
-            lineItems: [
-                {
-                    price_data: {
-                        unit_amount: event.tickets.reduce((acc, item, index) => acc + counters[index] * item.price,0), 
-                        currency: "egp",
-                        product_data: {
-                            name: `Tickets for ${event.name}`,
-                        }
-                    },
-                    quantity: counters.reduce((acc, item) => acc + item, 0)
-                }
-            ],
+            lineItems: ticketArr,
             metadata: payload
         };
 
