@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import axios from 'axios';
+import axios from "../../utils/axios";
+
 
 const Partners = () => {
   const containerRef = useRef(null);
@@ -20,7 +21,7 @@ const Partners = () => {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:3001/partners')
+    axios.get('/api/partner')
       .then(response => {
         setPartnersData(response.data);
       })
@@ -46,7 +47,7 @@ const Partners = () => {
             <div key={index} className="flex flex-col items-center shadow-lg p-1">
               <div class="w-20 h-20 overflow-hidden ">
                 <img
-                  src={partner.imgUrl}
+                  src={partner.img}
                   alt={partner.name}
                   className="rounded-full mb-2object-cover w-full h-full shadow-lg"
                 />

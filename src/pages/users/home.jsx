@@ -1,11 +1,11 @@
 import UserNavBar from "../../components/UserNavBar";
 import EventsContainer from "../../components/Home_Page_partials/EventsContainer";
 import FooterComponent from "../../components/FooterComponent";
-import Parteners from "../../components/Home_Page_partials/Parteners";
 import { useEffect, useState } from "react";
 import { TextField } from '@mui/material';
 import { FaSearchengin } from "react-icons/fa";
 import axios from "../../utils/axios";    
+import Partners from "../../components/Home_Page_partials/Partners";
 
 
 function Home() {
@@ -48,8 +48,8 @@ function Home() {
                         <div className="flex justify-center mb-4 md:w-[60%] w-[90%]">
                             <TextField label="Search Events" sx={TextFieldStyle} variant="outlined" type="text" placeholder="Search by Event Name or Venue...." InputProps={{ endAdornment: <FaSearchengin size={24} />, }} value={searchQuery} onChange={handleSearchQueryChange} />
                         </div>
-                        <h1 className="text-2xl text-[color:var(--light-gray)]  mb-5 flex justify-center ">  Our Parteners </h1>
-                        <Parteners />
+                        <h1 className="text-2xl text-[color:var(--light-gray)]  mb-5 flex justify-center ">  Our Partners </h1>
+                        <Partners />
                         <h1 className="text-2xl text-[color:var(--light-gray)]  mb-5 flex justify-center ">  Upcoming Events</h1>
                         <EventsContainer Events={filteredEvents} />
                     </div>
