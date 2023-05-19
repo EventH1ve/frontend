@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { TextField, Alert } from '@mui/material';
 import { useSession } from 'next-auth/react';
 import { FadeLoader } from 'react-spinners';
+import { setSessionToken } from "../../utils/sessionStorage";
 
 function SignInForm({ }) {
     const [username, setUsername] = useState('');
@@ -19,8 +20,14 @@ function SignInForm({ }) {
     const { data, status } = useSession();
 
     useEffect(() => {
-        if (status === "authenticated" && data.user.role.toLowerCase() === "user") router.push('/users/home');
-        else if (status === "authenticated" && data.user.role.toLowerCase() === "admin") router.push('/admins');
+        if (status === "authenticated" && data.user.role.toLowerCase() === "user"){ 
+            setSessionToken(data.user.token);
+            router.push('/users/home')
+        }
+        else if (status === "authenticated" && data.user.role.toLowerCase() === "admin"){
+            setSessionToken(data.user.token);
+            router.push('/admins')
+        };
     }, [status]);
 
     const handleSubmit = async (e) => {
