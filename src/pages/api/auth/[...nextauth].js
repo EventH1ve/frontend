@@ -14,7 +14,7 @@ export default NextAuth({
             },
             async authorize(credentials, req) {
                 const { username, password } = credentials;
-                const res = await axios.post('http://127.0.0.1:8000/api/user/login', {
+                const res = await axios.post('http://backend:8000/api/user/login', {
                     username,
                     password
                 })
