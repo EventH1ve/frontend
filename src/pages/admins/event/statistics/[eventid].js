@@ -70,7 +70,7 @@ const EventStatistics = () => {
     }
 
 
-    if (!eventData) return null;
+    if (!eventData) return <LoadingComponent />;
 
     return (
         <div className="bg-[color:var(--primary-color)]">

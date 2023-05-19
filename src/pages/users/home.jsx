@@ -1,6 +1,7 @@
 import UserNavBar from "../../components/UserNavBar";
 import EventsContainer from "../../components/Home_Page_partials/EventsContainer";
 import FooterComponent from "../../components/FooterComponent";
+import LoadingComponent from "../../components/LoadingComponent";
 import { useEffect, useState } from "react";
 import { TextField } from '@mui/material';
 import { FaSearchengin } from "react-icons/fa";
@@ -33,6 +34,10 @@ function Home() {
     const handleSearchQueryChange = (event) => {
         setSearchQuery(event.target.value);
     };
+
+    if (!allEvents) {
+        return <LoadingComponent />;
+    }
 
     return (
         <div className=" bg-[color:var(--primary-color)] h-full">

@@ -4,6 +4,7 @@ import EventDescription from '../../../components/Admin_Components/Event_ID_part
 import Cover from '../../../components/Admin_Components/Event_ID_partials/Cover';
 import UserNavBar from "../../../components/Admin_Components/AdminNavBar";
 import Footer from "../../../components/FooterComponent";
+import LoadingComponent from "../../../components/LoadingComponent";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
@@ -74,7 +75,7 @@ function EventPage() {
 
 
   if (!eventData || !eventData.cover)
-    return <div>loading...</div>;
+    return <LoadingComponent />;
   else
     return (
       <div className="bg-[color:var(--primary-color)]">
