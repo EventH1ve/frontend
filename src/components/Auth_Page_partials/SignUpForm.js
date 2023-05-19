@@ -1,10 +1,11 @@
 import { useState,useEffect } from 'react';
 import { FaEye, FaEyeSlash, FaKey } from 'react-icons/fa';
 import { TextField, Alert, FormControl, MenuItem, Select, InputLabel } from '@mui/material';
-import axios from 'axios';
+import axios from '../../utils/axios';
 import { useRouter } from "next/router";
 import { useSession } from 'next-auth/react';
 import LoadingComponent from '../LoadingComponent';
+
 
 
 function SignUpForm({ }) {
@@ -46,7 +47,7 @@ function SignUpForm({ }) {
         })
         try {
             let names = fullName.split(" ");
-            const res = await axios.post('http://127.0.0.1:8000/api/user/signup', {
+            const res = await axios.post('/api/user/signup', {
                 "firstname": names[0],
                 "lastname": names[1],
                 email,
