@@ -40,7 +40,7 @@ const EventCard = ({ event }) => {
                             : event.name}
                     </p>
                     <p className="text-sm text-gray-800">{event.venue}</p>
-                    <p className="text-sm text-gray-800">{event.date}</p>
+                    <p className="text-sm text-gray-800">{event.date.split("T")[0]}</p>
                 </div>
                 <div className="flex flex-col justify-end">
                     <span className="w-full flex flex-row justify-end ">
