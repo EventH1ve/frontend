@@ -23,6 +23,7 @@ const EventCard = ({ event }) => {
             <div style={{ flex: "1 0 auto", position: "relative" }}>
                 {event.profile && (
                     <Image
+                        loader={() => event.profile}
                         fill
                         className="object-cover h-full w-full rounded-md"
                         src={event.profile}
