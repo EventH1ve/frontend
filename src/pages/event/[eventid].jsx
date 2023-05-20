@@ -70,7 +70,7 @@ function EventPage() {
         return (
             <div className="bg-[color:var(--primary-color)]">
                 <UserNavBar />
-                <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-col items-center justify-center md:mx-5">
 
                     {/* Top div with image */}
                     <Cover eventData={eventData} />

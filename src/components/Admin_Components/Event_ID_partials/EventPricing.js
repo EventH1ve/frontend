@@ -1,6 +1,7 @@
 import { FaExclamationTriangle, FaTicketAlt } from "react-icons/fa";
 
 function EventPricing({ eventData }) {
+    console.log(eventData);
     return (
         <div className="mb-4 bg-white px-6 py-4 rounded-lg shadow-md">
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -8,7 +9,6 @@ function EventPricing({ eventData }) {
             </h3>
             <ul className="text-gray-600">
                 {eventData.tickets.map((item, index) => {
-                    console.log(item);
                     if (item.Available) {
                         return (
                             <li
@@ -16,7 +16,7 @@ function EventPricing({ eventData }) {
                                 className="flex justify-between items-center h-16 py-1 rounded-md p-4 gap-2 mb-2 hover:shadow-md"
                             >
                                 <FaTicketAlt className="text-[color:var(--darker-secondary-color)] text-2xl" />
-                                <span className="flex-1"> {item.type}</span>
+                                <span className="flex-1"> {item.name}</span>
                                 <span className="text-center text-xl">{item.price} EGP</span>
                             </li>
                         );

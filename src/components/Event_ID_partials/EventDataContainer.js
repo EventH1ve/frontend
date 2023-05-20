@@ -8,6 +8,13 @@ import BuyingBox from './BuyingBox';
 function EventDataContainer({ eventData }) {
     const [isOpen, setIsOpen] = useState(false);
     const [eventData_string, setEventData_string] = useState("");
+
+    const handleShare = () => {
+        
+        //take the event link and share it
+
+    
+    };
     
 
 

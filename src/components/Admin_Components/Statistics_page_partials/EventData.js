@@ -29,13 +29,13 @@ function EventDataContainer({ eventData }) {
                                 <span className="font-bold">
                                     Date:
                                 </span>{" "}
-                                {eventData.date.split("T")[0]}
+                                {eventData.date}
                             </div>
                             <div className="text-md text-gray-800 mr-4">
                                 <span className="font-bold">
                                     Time:
                                 </span>{" "}
-                                {eventData.date.split("T")[1]}
+                                {eventData.time}
                             </div>
                             <div className="text-md text-gray-800 mr-4">
                                 <span className="font-bold">

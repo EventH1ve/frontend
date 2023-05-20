@@ -54,7 +54,7 @@ const Seats = ({ selectedTicket, seatsGrid, handleSetSeats, selected_Seats }) =>
             <h2 className="text-2xl font-bold mb-4">Seats</h2>
             <div className="overflow-auto max-w-full max-h-[500px] inline-block" >
                 <table className="border-collapse min-w-10 inline-block ">
-                    <tbody className="mx-auto" style={{ transform: `scale(${zoom})`, transformOrigin: 'top left' }}>
+                    <tbody className="mx-auto" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
                         {Object.keys(seats).map(row => (
                             <tr key={row}>
                                 {seats[row].map((seat, index) => (

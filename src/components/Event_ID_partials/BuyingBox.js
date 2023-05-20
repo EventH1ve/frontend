@@ -11,6 +11,7 @@ function BuyingBox({ eventData }) {
     const [counters, setCounters] = useState(event.tickets.map(() => 0));
     const [seats, setSeats] = useState(event.tickets.map(() => []));
     const { status, data } = useSession();
+    console.log(eventData);
 
     const handleIncrement = (index) => {
         setCounters((prevCounters) => {
@@ -121,7 +122,7 @@ function BuyingBox({ eventData }) {
             </h3>
             <ul className="text-gray-600">
                 {event.tickets.map((item, index) => {
-                    if (item.Available && !item.Seated) {
+                    if (item.Available && !item.seated) {
                         return (
                             <li
                                 key={index}
@@ -167,7 +168,7 @@ function BuyingBox({ eventData }) {
                                 </span>
                             </li>
                         );
-                    } else if (item.Available && item.Seated) {
+                    } else if (item.Available && item.seated) {
                         return (
                             <li
                                 key={index}
