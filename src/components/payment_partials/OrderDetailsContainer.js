@@ -17,7 +17,7 @@ const OrderDetailsContainer = ({ subtotal, orderId, ticketURL }) => {
         <div
           className="flex justify-center items-center gap-9 overflow-x-auto whitespace-nowrap"
         >
-            <img src={ticketURL} />
+            
         </div>
       </div>
     </div>

@@ -16,8 +16,6 @@ function EventDataContainer({ eventData }) {
     
     };
     
-
-
     const togglePopup = () => {
         setIsOpen(!isOpen);
     };
@@ -30,9 +28,7 @@ function EventDataContainer({ eventData }) {
         setEventData_string(JSON.stringify(eventData));
         console.log(eventData_string);
     }, []);
-
     
-
     return (
         <div className="container bg-white py-4 mt-4 rounded-lg shadow-md">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">

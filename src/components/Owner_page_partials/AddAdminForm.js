@@ -80,7 +80,7 @@ function AddAdminForm({ }) {
             "email":email,
             "username":username,
             "gender":gender,
-            "subscription":subscription,
+            "subscription": parseInt(subscription), 
             "mobile":mobileNumber,
             "password":password,
             "logo":imageUrl,

@@ -45,7 +45,7 @@ const SeatsMap = ({ _seats, _setSeats, _index, _togglePopUp }) => {
   const handleNumColsChange = (event) => {
     if (event.target.value == "") {
       event.target.value = 0;
-    }  
+    }
     const newNumCols = parseInt(event.target.value);
     setNumCols(newNumCols);
     setSeats((prevSeats) => {
@@ -58,7 +58,7 @@ const SeatsMap = ({ _seats, _setSeats, _index, _togglePopUp }) => {
       });
       return newSeats;
     });
-  
+
   };
 
   const countRowsAndCols = () => {
@@ -111,15 +111,16 @@ const SeatsMap = ({ _seats, _setSeats, _index, _togglePopUp }) => {
           />
         </div>
         <div className="overflow-auto max-w-full max-h-[500px] inline-block" >
-        <table className="border-collapse min-w-10 inline-block">
+          <table className="border-collapse min-w-10 inline-block">
             <tbody className="mx-auto" style={{ transform: `scale(${zoom})`, transformOrigin: 'top center' }}>
               {Object.keys(seats).map((row) => (
                 <tr key={row}>
                   {seats[row].map((seat, index) => (
                     <td key={`${row}-${index}`} className="w-15">
                       <div
-                        className={`px-4 py-2 cursor-pointer ${seat === 0 ? "bg-green-500" : "bg-gray-500"
-                          } ${seat === 3 ? "bg-gray-500" : ""} rounded-lg mr-2 mb-2 w-16 h-15`}
+                        className={`px-4 py-2 cursor-${seat === 0 ? "pointer" : "not-allowed"} 
+                      ${seat === 0 ? "bg-green-500" : seat === 1 ? "bg-red-500" : seat === 2 ? "bg-yellow-500" : "bg-gray-500"} 
+                      rounded-lg mr-2 mb-2 w-16 h-15`}
                         onClick={() => handleSeatSelection(row, index)}
                       >
                         <FaChair className="text-white" />
