@@ -3,8 +3,8 @@ import { IoMenu } from 'react-icons/io5';
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import { signOut } from 'next-auth/react';
-
 import { FaUser, FaSignOutAlt, FaCog ,FaPlus,FaRegCalendarAlt } from 'react-icons/fa';
+
 
 function AdminNavBar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

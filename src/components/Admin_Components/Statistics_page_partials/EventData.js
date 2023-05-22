@@ -1,19 +1,12 @@
 import {useState} from 'react';
+import { useRouter } from "next/router";
+
 
 function EventDataContainer({ eventData }) {
     const [isOpen, setIsOpen] = useState(false);
-    
 
-
-    const togglePopup = () => {
-        setIsOpen(!isOpen);
-    };
-
-    const closePopup = () => {
-        setIsOpen(false);
-    };
-
-   
+    const router = useRouter();
+    const eventId = router.query.eventid;
     
 
     return (
@@ -53,7 +46,7 @@ function EventDataContainer({ eventData }) {
                     </div>
                     <div class="flex flex-col mt-2 md:mt-4">
                         
-                        <button type="button" class="mt-2 btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full mb-4 sm:w-auto sm:mb-0 whitespace-nowrap">
+                        <button type="button" class="mt-2 btn text-white bg-[color:var(--darker-secondary-color)] hover:bg-[color:var(--secondary-color)] w-full mb-4 sm:w-auto sm:mb-0 whitespace-nowrap"  onClick={() => router.push(`/admins/event/update/${eventId}`)}>
                             Update Event
                         </button>
                     </div>
