@@ -43,8 +43,6 @@ function UpComingPopUp({ UpcomingEvents }) {
                                 <th className="py-3 px-6 text-left">Event</th>
                                 <th className="py-3 px-6 text-left">Venue</th>
                                 <th className="py-3 px-6 text-left">Date</th>
-                                <th className="py-3 px-6 text-left">Sold Ticket</th>
-                                <th className="py-3 px-6 text-left">Revenue</th>
                             </tr>
                         </thead>
                         <tbody className="text-gray-600 text-sm font-light">
@@ -53,8 +51,6 @@ function UpComingPopUp({ UpcomingEvents }) {
                                     <td className="py-3 px-6 text-left whitespace-nowrap">{event.name}</td>
                                     <td className="py-3 px-6 text-left">{event.venue}</td>
                                     <td className="py-3 px-6 text-left">{event.date}</td>
-                                    <td className="py-3 px-6 text-left">{event.soldTickets}</td>
-                                    <td className="py-3 px-6 text-left">{event.revenue}</td>
                                    
                                 </tr>
                             ))}
