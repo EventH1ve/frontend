@@ -67,10 +67,10 @@ const UpcomingEvents = ({ UpcomingEvents }) => {
                   <td className="py-3 px-6 text-left whitespace-nowrap">{event.name}</td>
                   <td className="py-3 px-6 text-left">{event.venue}</td>
                   <td className="py-3 px-6 text-left">{event.date}</td>
-                  <td className="py-3 px-6 text-left">{event.ticketType}</td>
+                  <td className="py-3 px-6 text-left">{event.tickettype}</td>
                   <td className="py-3 px-6 text-left">{event.price}</td>
                   <td className={`py-3 px-6 text-left ${event.status === "Paid" ? "text-green-600" : event.status === "Pending" ? "text-yellow-600" : ""}`}>{event.status}</td>
-                  <td className="py-3 px-6 text-left">{event.transactionId}</td>
+                  <td className="py-3 px-6 text-left">{event.transactionid}</td>
                 </tr>
               ))
             ) : (
@@ -79,10 +79,10 @@ const UpcomingEvents = ({ UpcomingEvents }) => {
                   <td className="py-3 px-6 text-left whitespace-nowrap">{event.name}</td>
                   <td className="py-3 px-6 text-left">{event.venue}</td>
                   <td className="py-3 px-6 text-left">{event.date}</td>
-                  <td className="py-3 px-6 text-left">{event.ticketType}</td>
+                  <td className="py-3 px-6 text-left">{event.tickettype}</td>
                   <td className="py-3 px-6 text-left">{event.price}</td>
                   <td className={`py-3 px-6 text-left ${event.status === "Paid" ? "text-green-600" : event.status === "Pending" ? "text-yellow-600" : ""}`}>{event.status}</td>
-                  <td className="py-3 px-6 text-left">{event.transactionId}</td>
+                  <td className="py-3 px-6 text-left">{event.transactionid}</td>
                 </tr>
               ))
             )}
