@@ -14,14 +14,14 @@ const Counters = ({ Counters }) => {
             <div className="p-4">
               <h4 className="text-lg font-medium mb-2">Your Past Events<i className="mdi mdi-bookmark-outline mdi-24px float-right"></i></h4>
               <h2 className="text-4xl font-bold">{Counters.pastEvents}</h2>
-              <h6 className="text-xs font-medium">...... {Counters.pastEvents}</h6>
+              <h6 className="text-xs font-medium">Hope you enjoyed it!</h6>
             </div>
           </div>
           <div className="col-span-1 bg-gradient-to-r from-green-500 to-teal-500 text-white rounded-lg shadow-lg">
             <div className="p-4">
               <h4 className="text-lg font-medium mb-2">Your Membership Ends After <i className="mdi mdi-diamond mdi-24px float-right"></i></h4>
               <h2 className="text-4xl font-bold">{Counters.leftDaysforTheMembership}</h2>
-              <h6 className="text-xs font-medium">......</h6>
+              <h6 className="text-xs font-medium">Hope you will renew it soon</h6>
             </div>
           </div>
         </div>
