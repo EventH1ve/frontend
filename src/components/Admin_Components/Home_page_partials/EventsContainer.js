@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 import { FaExclamationTriangle } from "react-icons/fa";
 import EventCard from "./EventCard";
 import LoadingComponent from "../../LoadingComponent";
@@ -18,6 +18,12 @@ const EventsContainer = ({ Events }) => {
 
         return () => clearTimeout(timer);
     }, []);
+
+    useEffect(() => {
+        if (Events.length !== 0) {
+            setIsLoading(false);
+        }
+    }, [Events]);
 
     const handleAddEvent = () => {
         router.push("/admins/event/addevent");
@@ -40,7 +46,7 @@ const EventsContainer = ({ Events }) => {
                     </button>
                 </div>
             ) : (
-                events.map((event) => <EventCard key={event.id} event={event} />)
+                Events.map((event) => <EventCard key={event.id} event={event} />)
             )}
 
 
