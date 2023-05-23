@@ -47,7 +47,6 @@ const EventCard = ({ event }) => {
                 <div className="flex flex-col justify-end">
                     <span className="w-full flex flex-row justify-end ">
                         <FaUsers />
-                        <span className="ml-2 text-sm">4,92</span>
                     </span>
                     <p className="text-sm text-gray-800 mt-2">
                         <strong className="whitespace-nowrap">Starts From {event.price}Egp</strong>
