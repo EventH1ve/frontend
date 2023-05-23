@@ -67,9 +67,7 @@ const AdminsHome = () => {
         return <LoadingComponent />;
     }
 
-    if (allEvents.length === 0) {
-        return <LoadingComponent />;
-    }
+    
 
 
     return (
